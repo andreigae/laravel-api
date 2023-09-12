@@ -36,6 +36,30 @@ class User extends Authenticatable
         'admin',
     ];
 
+
+
+    // Mutadores y Accesores (Sirven para cambiar el valor de un atributo antes de insertarlo en la base de datos o antes de mostrarlo)
+
+    // Cambiar el valor de name a minusculas antes de insertarlo en la base de datos
+    public function setNameAttribute($valor)
+    {
+        $this->attributes['name'] = strtolower($valor);
+    }
+
+    // Cambiar el valor de name a mayusculas antes de mostrarlo
+    public function getNameAttribute($valor)
+    {
+        return ucwords($valor);
+    }
+
+    // Cambiar el valor de email a minusculas antes de insertarlo en la base de datos
+    public function setEmailAttribute($valor)
+    {
+        $this->attributes['email'] = strtolower($valor);
+    }
+
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
