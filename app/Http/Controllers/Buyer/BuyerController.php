@@ -8,9 +8,7 @@ use App\Models\Buyer;
 
 class BuyerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Get all buyers
     public function index()
     {
         $compradores = Buyer::has('transactions')->get();
@@ -18,12 +16,11 @@ class BuyerController extends Controller
         return response()->json(['data' => $compradores], 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Show a specific buyer
+    public function show($id)
     {
-        //
-    }
+        $comprador = Buyer::has('transactions')->findOrFail($id);
 
+        return response()->json(['data' => $comprador], 200);
+    }
 }
