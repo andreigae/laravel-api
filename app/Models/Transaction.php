@@ -14,4 +14,16 @@ class Transaction extends Model
     	'buyer_id',
     	'product_id',
     ];
+
+    // Una transacción pertenece a un comprador y se accede a él con el método buyer
+    public function buyer()
+    {
+    	return $this->belongsTo(Buyer::class);
+    }
+
+    // Una transacción pertenece a un producto y se accede a él con el método product
+    public function product()
+    {
+    	return $this->belongsTo(Product::class);
+    }
 }

@@ -26,5 +26,24 @@ class Product extends Model
     	return $this->status == Product::PRODUCTO_DISPONIBLE;
     }
 
+    // El producto pertenece a un vendedor y se accede a él con el método seller
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
+    }
+
+    // El producto tiene muchas transacciones y se accede a todas ellas con el método transactions
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    // El producto tiene muchas categorías y se accede a todas ellas con el método categories
+    // a su vez, cada categoría tiene muchos productos y se accede a ellos con el método products
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 
 }
