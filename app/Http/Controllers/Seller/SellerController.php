@@ -7,23 +7,23 @@ use App\Models\Seller;
 
 class SellerController extends Controller
 {
+
+    
+
+
+    
+
+
     public function index()
     {
-        $sellers = Seller::has('transactions')->get();
+        $vendedores = Seller::has('products')->get();
 
-        return response()->json(['data' => $sellers], 200);
+        return response()->json(['data' => $vendedores], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $sellers = Seller::has('transactions')->findOrFail($id);
-
-        return response()->json(['data' => $sellers], 200);
+        //
     }
 }
+
