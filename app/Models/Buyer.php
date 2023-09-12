@@ -9,6 +9,8 @@ class Buyer extends Model
 {
     use HasFactory;
 
+    protected $table = "users";
+
     // El comprador tiene muchas transacciones y se accede a todas ellas con el método transactions
     // hasMany is used in a One To Many relationship 
     // while belongsToMany refers to a Many To Many relationship.
