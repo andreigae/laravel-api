@@ -5,7 +5,7 @@ namespace App\Traits;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
-trait ApiResponse
+trait ApiResponser
 {
 	private function successResponse($data, $code)
 	{
