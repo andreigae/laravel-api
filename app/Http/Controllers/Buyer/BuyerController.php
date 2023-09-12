@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Buyer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Buyer;
+use App\Http\Controllers\ApiController;
 
-
-class BuyerController extends Controller
+class BuyerController extends ApiController
 {
     // Get all buyers
     public function index()

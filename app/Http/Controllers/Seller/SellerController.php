@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
 use App\Models\Seller;
+use App\Http\Controllers\ApiController;
 
-class SellerController extends Controller
+class SellerController extends ApiController
 {
 
 
