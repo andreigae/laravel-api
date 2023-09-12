@@ -23,7 +23,6 @@ class TransactionFactory extends Factory
         $comprador = User::all()->except($vendedor->id)->random();
 
         return [
-            'name' => fake()->word,
             'quantity' => fake()->numberBetween(1, 3),
             'buyer_id' => $comprador->id,
             'product_id' => $vendedor->products->random()->id,
