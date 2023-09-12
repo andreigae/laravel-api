@@ -21,10 +21,11 @@ return new class extends Migration
             $table->string('status')->default(Product::PRODUCTO_NO_DISPONIBLE);
             $table->string('image');
     
-            $table->timestamps();
 
             $table->integer('seller_id')->unsigned();
             $table->foreign('seller_id')->references('id')->on('users');
+
+            $table->timestamps();
 
         });
     }
