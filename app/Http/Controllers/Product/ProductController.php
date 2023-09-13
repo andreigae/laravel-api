@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
+use App\Models\Product;
+
 class ProductController extends ApiController
 {
     /**
@@ -13,7 +15,8 @@ class ProductController extends ApiController
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        return $this->showAll($products);
     }
 
     /**
