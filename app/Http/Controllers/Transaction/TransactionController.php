@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 
+use App\Models\Transaction;
+
 class TransactionController extends ApiController
 {
     /**
@@ -13,7 +15,8 @@ class TransactionController extends ApiController
      */
     public function index()
     {
-        //
+        $transactions = Transaction::all();
+        return $this->showAll($transactions);
     }
 
     /**
@@ -35,7 +38,7 @@ class TransactionController extends ApiController
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Transaction $transaction)
     {
         //
     }
@@ -43,7 +46,7 @@ class TransactionController extends ApiController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Transaction $transaction)
     {
         //
     }
@@ -51,7 +54,7 @@ class TransactionController extends ApiController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Transaction $transaction)
     {
         //
     }
@@ -59,7 +62,7 @@ class TransactionController extends ApiController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Transaction $transaction)
     {
         //
     }
