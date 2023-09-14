@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Buyer\BuyerController;
+use App\Http\Controllers\Buyer\BuyerTransactionController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Transaction\TransactionController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Transaction\TransactionCategoryController;
 use App\Http\Controllers\Transaction\TransactionSellerController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -33,6 +35,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  */
 
 Route::resource('buyers', BuyerController::class)->only(['index', 'show']);
+Route::resource('buyers.transactions', BuyerTransactionController::class)->only(['index']);
 
 /**
  * Categories
