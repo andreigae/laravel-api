@@ -8,6 +8,7 @@ use App\Models\Seller;
 use App\Models\Product;
 use App\Models\User;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Illuminate\Support\Facades\Storage;
 
 class SellerProductController extends ApiController
 {
@@ -32,7 +33,17 @@ class SellerProductController extends ApiController
         $data = $request->all();
 
         $data['status'] = Product::PRODUCTO_NO_DISPONIBLE;
-        $data['image'] = '1.jpg';
+        $data['image'] = $request->image->store(''); // Guarda la imagen con un nombre aleatorio en la carpeta publica que es por defecto images
+     
+        /*
+            // Guarda con nombre alteatorio
+            Storage::disk('local')->put('public/images', $request->file('image'), 'public');
+
+            // Guarda con nombre original
+            $originalName = $request->file('image')->getClientOriginalName();
+            Storage::disk('local')->putFileAs('public/images', $request->file('image'), $originalName, 'public');
+        */
+
         $data['seller_id'] = $seller->id;
 
         $product = Product::create($data);
