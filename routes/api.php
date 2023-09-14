@@ -12,6 +12,7 @@ use App\Http\Controllers\Seller\SellerController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Transaction\TransactionCategoryController;
 use App\Http\Controllers\Transaction\TransactionSellerController;
+use App\Http\Controllers\Buyer\BuyerSellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('buyers', BuyerController::class)->only(['index', 'show']);
 Route::resource('buyers.transactions', BuyerTransactionController::class)->only(['index']);
 Route::resource('buyers.products', BuyerProductController::class)->only(['index']);
+Route::resource('buyers.sellers', BuyerSellerController::class)->only(['index']);
 
 /**
  * Categories
