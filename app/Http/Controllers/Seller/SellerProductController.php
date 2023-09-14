@@ -7,27 +7,16 @@ use App\Http\Controllers\ApiController;
 use App\Models\Seller;
 use App\Models\Product;
 use App\Models\User;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellerProductController extends ApiController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Seller $seller)
     {
         $products = $seller->products;
 
         return $this->showAll($products);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
 
     public function store(Request $request, User $seller)
     {
@@ -51,13 +40,7 @@ class SellerProductController extends ApiController
         return $this->showOne($product, 201);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Seller $seller, Product $product)
     {
         $rules = [
@@ -68,9 +51,8 @@ class SellerProductController extends ApiController
 
         $this->validate($request, $rules);
 
-        if ($seller->id != $product->seller_id) {
-            return $this->errorResponse('El vendedor especificado no es el vendedor real del product', 422);
-        }
+        $this->verificarVendedor($seller, $product);
+
 
         $product->fill($request->only([
             'name',
@@ -97,14 +79,26 @@ class SellerProductController extends ApiController
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Seller  $seller
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Seller $seller)
+    public function destroy(Seller $seller, Product $product)
     {
-        //
+        $this->verificarVendedor($seller, $product);
+
+        $product->delete();
+
+        return $this->showOne($product);
     }
+
+
+
+
+
+
+    protected function verificarVendedor(Seller $seller, Product $product)
+    {
+        if ($seller->id != $product->seller_id) {
+            throw new HttpException(422, 'El vendedor especificado no es el vendedor real del producto');
+        }
+    }
+
+
 }
