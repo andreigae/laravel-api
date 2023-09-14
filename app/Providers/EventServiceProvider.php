@@ -5,7 +5,12 @@ namespace App\Providers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+
+
+
+use App\Models\Product;
+use App\Observers\ProductObserver;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -25,7 +30,32 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Product::observe(ProductObserver::class);
+
+        /* OTRA FORMA DE CONSEGUIR EL MISMO RESULTADO en este archivo:
+            Product::updated(function($product) {
+                if ($product->quantity == 0 && $product->estaDisponible()) {
+                    $product->status = Product::PRODUCTO_NO_DISPONIBLE;
+
+                    $product->save();
+                }
+            });
+
+
+            Tambien se puede declarar esto directamente en el modelo Product en el metodo booted, de la siguiente forma:
+            class User extends Model
+            {
+
+                protected static function booted()
+                {
+                    static::created(function ($user) {
+                        // Lógica para hacer algo con la instancia del modelo.
+                    });
+                }
+            }
+
+            Pero sinceramente la forma anterior es la mas limpia
+         */
     }
 
     /**
