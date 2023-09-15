@@ -16,7 +16,9 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        Mail::to($user)->send(new UserCreated($user));
+        retry(5, function() use ($user) {
+            Mail::to($user)->send(new UserCreated($user));
+        }, 500);
     }
 
     /**
@@ -25,7 +27,9 @@ class UserObserver
     public function updated(User $user): void
     {
         if(!$user->verification_token == null){
-            Mail::to($user)->send(new UserCreated($user));
+            retry(5, function() use ($user) {
+                Mail::to($user)->send(new UserMailChanged($user));
+            }, 500);
         }
     }
 
