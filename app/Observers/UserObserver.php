@@ -24,7 +24,9 @@ class UserObserver
      */
     public function updated(User $user): void
     {
-        Mail::to($user)->send(new UserMailChanged($user));
+        if(!$user->verification_token == null){
+            Mail::to($user)->send(new UserCreated($user));
+        }
     }
 
     /**
