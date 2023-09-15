@@ -6,6 +6,7 @@ use App\Models\User;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\UserCreated;
+use App\Mail\UserMailChanged;
 
 
 class UserObserver
@@ -23,7 +24,7 @@ class UserObserver
      */
     public function updated(User $user): void
     {
-        //
+        Mail::to($user)->send(new UserMailChanged($user));
     }
 
     /**
