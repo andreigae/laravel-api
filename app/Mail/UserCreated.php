@@ -9,16 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+use App\Models\User;
+
 class UserCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user;
+
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -37,7 +42,7 @@ class UserCreated extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            text: 'view.welcome',
         );
     }
 
