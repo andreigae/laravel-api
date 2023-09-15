@@ -27,7 +27,7 @@ class UserMailChanged extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'User Mail Changed',
+            subject: 'Por favor confirma tu nuevo correo',
         );
     }
 
@@ -37,7 +37,7 @@ class UserMailChanged extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.confirm',
         );
     }
 
