@@ -26,6 +26,18 @@ class User extends Authenticatable
     protected $table = 'users';
     protected $dates = ['deleted_at'];
 
+     /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+        'verification_token',
+    ];
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -65,17 +77,7 @@ class User extends Authenticatable
 
 
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-        'verification_token',
-    ];
-
+   
     /**
      * The attributes that should be cast.
      *
