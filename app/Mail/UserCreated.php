@@ -32,7 +32,7 @@ class UserCreated extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'User Created',
+            subject: 'Por favor confirma tu correo electrónico',
         );
     }
 
@@ -42,7 +42,7 @@ class UserCreated extends Mailable
     public function content(): Content
     {
         return new Content(
-            text: 'view.welcome',
+            text: 'emails.welcome',
         );
     }
 
